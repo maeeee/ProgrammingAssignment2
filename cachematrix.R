@@ -4,7 +4,7 @@
 
 
 makeCacheMatrix <- function(x = matrix()) {
-	inv <- NULL  ## initialize the matrix inverve as MULL
+	inv <- NULL  ## initialize the matrix inverse as NULL
 	set <- function(y) {
 		x <<- y  ## set the matrix globally
 		inv <<- NULL	
