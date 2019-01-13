@@ -4,14 +4,14 @@
 
 
 makeCacheMatrix <- function(x = matrix()) {
-	inv <- NULL
+	inv <- NULL  ## initialize the matrix inverve as MULL
 	set <- function(y) {
-		x <<- y
+		x <<- y  ## set the matrix globally
 		inv <<- NULL	
 	}
-	get <- function() x
-	setInverse <- function(inverse) inv <<- inverse
-	getInverse <- function() inv
+	get <- function() x ## get the matrix x
+	setInverse <- function(inverse) inv <<- inverse  ## set the inversion
+	getInverse <- function() inv   ## get the inversion
 	list(set = set, get = get,
 	setInverse = setInverse,
 	getInverse = getInverse)
@@ -24,15 +24,17 @@ makeCacheMatrix <- function(x = matrix()) {
 ## retrives the inverse from the cache. 
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-        inv <- x$getInverse()
+        ## Return a matrix that is the inversion of 'x'
+        inv <- x$getInverse() ##get the inversion of x and assign it to inv
+        ## if !is.null(inv) is TRUE, this means we already calculated the inversed matrix
         if(!is.null(inv)) {
-        	message("getting cached data")
-        	return(inv)
+        	message("getting cached data")  ## pring the massage "getting cached data"
+        	return(inv) ## return the cached inv
         }
-        matr <- x$get()
-        inv <- solve(matr, ...)
-        x$setInverse(inv)
+        ## if no cached data was found, do the following
+        matr <- x$get() ## get the matrix and assign it to matr
+        inv <- solve(matr, ...) ## calculate the inversion using function solve()
+        x$setInverse(inv) 
         inv
 }
 
